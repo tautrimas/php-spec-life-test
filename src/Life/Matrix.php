@@ -7,7 +7,7 @@ class Matrix
     /**
      * @var array
      */
-    private $matrix;
+    private $world;
 
     public function calculateNewState($currentState, $count)
     {
@@ -28,12 +28,12 @@ class Matrix
 
     public function initMatrix($sizeX, $sizeY)
     {
-        $this->matrix = [];
+        $this->world = [];
 
         foreach (range(1, $sizeY) as $y) {
-            $this->matrix[$y - 1] = [];
+            $this->world[$y - 1] = [];
             foreach (range(1, $sizeX) as $x) {
-                $this->matrix[$y - 1][] = 0;
+                $this->world[$y - 1][] = 0;
             }
         }
     }
@@ -41,8 +41,34 @@ class Matrix
     /**
      * @return array
      */
-    public function getMatrix()
+    public function getWorld()
     {
-        return $this->matrix;
+        return $this->world;
+    }
+
+    /**
+     * @param array $world
+     */
+    public function setWorld($world)
+    {
+        $this->world = $world;
+    }
+
+    public function getNeighbours(array $coordinates)
+    {
+        list($x, $y) = $coordinates;
+        $countX = count($this->world[0]);
+        $countY = count($this->world);
+        $neighbours = [];
+
+        foreach (range(max(0, $y - 1), min($y + 1, $countY)) as $cy) {
+            foreach (range(max(0, $x - 1), min($x + 1, $countX)) as $cx) {
+                if (!($x === $cx && $y === $cy)) {
+                    $neighbours[] = [$cx, $cy];
+                }
+            }
+        }
+
+        return $neighbours;
     }
 }

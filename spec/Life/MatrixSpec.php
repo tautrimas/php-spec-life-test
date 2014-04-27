@@ -29,17 +29,39 @@ class MatrixSpec extends ObjectBehavior
     {
         $this->initMatrix(2, 3)->shouldReturn(null);
         $world = [[0, 0], [0, 0], [0, 0]];
-        $this->getMatrix()->shouldReturn($world);
+        $this->getWorld()->shouldReturn($world);
     }
 
-//    function it_tells_neighbour_coordinates()
-//    {
-//        $this->initMatrix(5, 5);
-//        $this->getNeighbours([0, 0])->shouldReturn([
-//                [1, 0],
-//                [0, 1],
-//                [1, 1],
-//                [2, 1],
-//            ]);
-//    }
+    function it_tells_neighbour_coordinates()
+    {
+        $world = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ];
+        $this->setWorld($world);
+
+
+        $this->getNeighbours([0, 0])->shouldReturn(
+            [
+                [1, 0],
+                [0, 1],
+                [1, 1],
+            ]
+        );
+
+        $this->getNeighbours([1, 1])->shouldReturn(
+            [
+                [0, 0],
+                [1, 0],
+                [2, 0],
+                [0, 1],
+                [2, 1],
+                [0, 2],
+                [1, 2],
+                [2, 2],
+            ]
+        );
+    }
 }
