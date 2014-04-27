@@ -24,4 +24,22 @@ class MatrixSpec extends ObjectBehavior
 
         $this->calculateNewState(0, 3)->shouldReturn(1);
     }
+
+    function it_can_initialize_empty_world()
+    {
+        $this->initMatrix(2, 3)->shouldReturn(null);
+        $world = [[0, 0], [0, 0], [0, 0]];
+        $this->getMatrix()->shouldReturn($world);
+    }
+
+//    function it_tells_neighbour_coordinates()
+//    {
+//        $this->initMatrix(5, 5);
+//        $this->getNeighbours([0, 0])->shouldReturn([
+//                [1, 0],
+//                [0, 1],
+//                [1, 1],
+//                [2, 1],
+//            ]);
+//    }
 }
