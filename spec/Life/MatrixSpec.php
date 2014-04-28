@@ -32,7 +32,7 @@ class MatrixSpec extends ObjectBehavior
         $this->getWorld()->shouldReturn($world);
     }
 
-    function it_tells_neighbour_coordinates()
+    function it_can_tell_neighbour_coordinates()
     {
         $world = [
             [0, 0, 0, 0],
@@ -63,5 +63,41 @@ class MatrixSpec extends ObjectBehavior
                 [2, 2],
             ]
         );
+    }
+
+    function it_can_count_alive_neighbours()
+    {
+        $world = [
+            [0, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 1],
+            [0, 0, 0, 0],
+        ];
+        $this->setWorld($world);
+        $this->countAliveNeighbours([2, 2])->shouldReturn(3);
+    }
+
+    function it_can_calculate_new_state()
+    {
+        $world = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0],
+        ];
+        $this->setWorld($world);
+
+        $expectedWorld = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0],
+        ];
+        $this->step();
+        $this->getWorld()->shouldReturn($expectedWorld);
     }
 }
