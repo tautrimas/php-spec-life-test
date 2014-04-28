@@ -82,7 +82,7 @@ class Matrix
             }
         }
 
-        $this->world = $tempWorld;
+        return $tempWorld;
     }
 
     public function countAliveNeighbours($pos)

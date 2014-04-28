@@ -91,7 +91,6 @@ class MatrixSpec extends ObjectBehavior
             [0, 0, 0, 1, 1, 0],
             [0, 0, 0, 0, 0, 0],
         ];
-        $this->step();
-        $this->getWorld()->shouldReturn($expectedWorld);
+        $this->step()->shouldReturn($expectedWorld);
     }
 }
