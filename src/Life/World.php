@@ -2,7 +2,7 @@
 
 namespace Life;
 
-class Matrix
+class World
 {
     /**
      * @var array

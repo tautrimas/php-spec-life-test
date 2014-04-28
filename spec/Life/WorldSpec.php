@@ -6,7 +6,7 @@ use Life\CellService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class MatrixSpec extends ObjectBehavior
+class WorldSpec extends ObjectBehavior
 {
     function let()
     {
@@ -16,7 +16,7 @@ class MatrixSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Life\Matrix');
+        $this->shouldHaveType('Life\World');
     }
 
     function it_can_initialize_empty_world()
@@ -26,7 +26,7 @@ class MatrixSpec extends ObjectBehavior
         $this->getWorld()->shouldReturn($world);
     }
 
-    function it_can_tell_neighbour_coordinates()
+    function it_can_tell_cells_neighbour_coordinates()
     {
         $world = [
             [0, 0, 0, 0],
