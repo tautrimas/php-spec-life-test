@@ -9,21 +9,17 @@ class Matrix
      */
     private $world;
 
-    public function calculateNewState($currentState, $count)
+    /**
+     * @var CellService
+     */
+    private $cellService;
+
+    /**
+     * @param CellService $cellService
+     */
+    public function __construct($cellService)
     {
-        if ($currentState === 0 && $count === 3) {
-            return 1;
-        }
-
-        if ($currentState === 1) {
-            if ($count < 2 || $count > 3) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-
-        return 0;
+        $this->cellService = $cellService;
     }
 
     public function initMatrix($sizeX, $sizeY)
@@ -33,7 +29,7 @@ class Matrix
         foreach (range(1, $sizeY) as $y) {
             $this->world[$y - 1] = [];
             foreach (range(1, $sizeX) as $x) {
-                $this->world[$y - 1][] = 0;
+                $this->world[$y - 1][$x - 1] = 0;
             }
         }
     }
@@ -101,5 +97,10 @@ class Matrix
             $neighs
         );
         return array_sum($neighsValues);
+    }
+
+    private function calculateNewState($param, $neighCount)
+    {
+        return $this->cellService->calculateNewState($param, $neighCount);
     }
 }
